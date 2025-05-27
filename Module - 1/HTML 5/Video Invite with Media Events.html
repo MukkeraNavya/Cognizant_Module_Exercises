@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Promo Video</title>
+  <style>
+    #videoMessage {
+      margin-top: 10px;
+      font-weight: bold;
+      color: green;
+      text-align: center;
+    }
+    form {
+      max-width: 400px;
+      margin: 30px auto;
+      font-family: Arial, sans-serif;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 8px;
+      background-color: #f4f4f4;
+    }
+    label, input, button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">Event Promo Video</h2>
+
+<video id="promoVideo" width="480" controls oncanplay="videoReady()">
+  <source src="promo.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+<div id="videoMessage"></div>
+
+<form id="sampleForm">
+  <label for="email">Enter your email to register interest:</label>
+  <input type="email" id="email" name="email" placeholder="you@example.com" required />
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  const videoMessage = document.getElementById('videoMessage');
+  const form = document.getElementById('sampleForm');
+  let formDirty = false;
+
+  // When video is ready to play
+  function videoReady() {
+    videoMessage.textContent = "Video ready to play";
+  }
+
+  // Mark form as dirty if user starts typing
+  form.addEventListener('input', () => {
+    formDirty = true;
+  });
+
+  // On form submit, reset dirty flag
+  form.addEventListener('submit', (e) => {
+    e.preventDefault(); // For demo, prevent actual submit
+    alert("Form submitted successfully!");
+    formDirty = false;
+    form.reset();
+  });
+
+  // Warn user if they try to leave with unsaved form changes
+  window.addEventListener('beforeunload', function (e) {
+    if (formDirty) {
+      e.preventDefault();
+      e.returnValue = '';  // Chrome requires returnValue to be set
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Debugging Practice - Community Event Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    /* Intentional bug: button is off layout due to incorrect width */
+    #registerBtn {
+      width: 3000px; /* too wide - fix using Inspect Element */
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .info {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to the Local Community Event Portal</h1>
+
+  <button id="registerBtn">Register Now</button>
+
+  <div class="info">
+    <p>Click the button above to simulate registration and debug the script.</p>
+  </div>
+
+  <script>
+    console.log("Page loaded successfully");
+
+    document.getElementById("registerBtn").addEventListener("click", function () {
+      console.log("Register button clicked");
+
+      let username = "guest";
+      let eventType = "cleanup";
+      let registered = false;
+
+      debugger; // <- Use this to pause and inspect variables in DevTools
+
+      // Simulate a logic issue
+      if (eventType === "concert") {
+        registered = true;
+      }
+
+      if (registered) {
+        console.log("User registered successfully.");
+      } else {
+        console.error("Registration failed: Event type not supported.");
+      }
+    });
+  </script>
+
+</body>
+</html>

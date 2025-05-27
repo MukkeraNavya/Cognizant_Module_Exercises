@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local Community Event Portal</title>
+    <style>
+        /* Image gallery styles */
+        .event-image {
+            border: 3px solid #333;
+            border-radius: 6px;
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: separate;
+            border-spacing: 15px;
+        }
+
+        td {
+            text-align: center;
+            vertical-align: top;
+        }
+
+        figcaption {
+            font-style: italic;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* Form styles */
+        form {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 2px solid #007BFF;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 2px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        form textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        form button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        #confirmation {
+            margin-top: 20px;
+            font-weight: bold;
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align:center;">Community Events Gallery</h2>
+
+    <!-- Image Gallery Table -->
+    <table>
+        <tr>
+            <td>
+                <figure>
+                    <img src="event1.jpg" alt="Local Festival 2024" title="Local Festival 2024" class="event-image" />
+                    <figcaption>Local Festival 2024</figcaption>
+                </figure>
+            </td>
+            <td>
+                <figure>
+                    <img src="event2.jpg" alt="Charity Run" title="Charity Run" class="event-image" />
+                    <figcaption>Charity Run</figcaption>
+                </figure>
+            </td>
+            <td>
+                <figure>
+                    <img src="event3.jpg" alt="Community Cleanup" title="Community Cleanup" class="event-image" />
+                    <figcaption>Community Cleanup</figcaption>
+                </figure>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <figure>
+                    <img src="event4.jpg" alt="Art in the Park" title="Art in the Park" class="event-image" />
+                    <figcaption>Art in the Park</figcaption>
+                </figure>
+            </td>
+            <td>
+                <figure>
+                    <img src="event5.jpg" alt="Food Fair" title="Food Fair" class="event-image" />
+                    <figcaption>Food Fair</figcaption>
+                </figure>
+            </td>
+            <td>
+                <figure>
+                    <img src="event6.jpg" alt="Music Concert" title="Music Concert" class="event-image" />
+                    <figcaption>Music Concert</figcaption>
+                </figure>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Event Registration Form -->
+    <form id="registrationForm">
+        <h2 style="text-align:center;">Event Registration</h2>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required autofocus />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="example@example.com" required />
+
+        <label for="date">Event Date:</label>
+        <input type="date" id="date" name="date" required />
+
+        <label for="eventType">Event Type:</label>
+        <select id="eventType" name="eventType" required>
+            <option value="" disabled selected>Select event type</option>
+            <option value="festival">Festival</option>
+            <option value="charity_run">Charity Run</option>
+            <option value="cleanup">Community Cleanup</option>
+            <option value="art">Art in the Park</option>
+            <option value="food_fair">Food Fair</option>
+            <option value="music_concert">Music Concert</option>
+        </select>
+
+        <label for="message">Message / Questions:</label>
+        <textarea id="message" name="message" placeholder="Any special requests or questions?"></textarea>
+
+        <button type="submit">Register</button>
+
+        <output id="confirmation" for="registrationForm"></output>
+    </form>
+
+    <script>
+        // Handle form submission and display confirmation message
+        const form = document.getElementById('registrationForm');
+        const confirmation = document.getElementById('confirmation');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Collect form data
+            const name = form.name.value.trim();
+            const eventType = form.eventType.options[form.eventType.selectedIndex].text;
+
+            // Display confirmation message
+            confirmation.textContent = Thank you, ${name}, for registering for the "${eventType}" event! We will contact you soon.;
+
+            // Optionally, reset form
+            form.reset();
+            form.name.focus();
+        });
+    </script>
+
+</body>
+</html>

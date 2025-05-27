@@ -1,0 +1,44 @@
+/* Base layout */
+nav ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+/* Responsive changes */
+@media screen and (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  img {
+    max-width: 90%;
+  }
+
+  .eventCard {
+    padding: 10px;
+  }
+}
+
+/* Bonus: Flexbox example */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Or Grid */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}

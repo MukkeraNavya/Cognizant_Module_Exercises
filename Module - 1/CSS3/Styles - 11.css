@@ -1,0 +1,72 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body background */
+body {
+  font-family: Arial, sans-serif;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #e0f7fa; /* Fallback */
+  padding: 20px;
+}
+
+/* Header */
+#mainHeader {
+  font-size: 32px;
+  background: linear-gradient(to right, #006064, #26c6da);
+  color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+/* Event Cards */
+.eventCard {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Description */
+.description {
+  text-align: justify;
+  line-height: 1.6;
+}
+
+/* Navigation */
+ul.nav {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+}
+
+ul.nav li a {
+  text-decoration: none;
+  color: #00796b;
+}
+
+ul.nav li a:hover {
+  color: #004d40;
+}
+
+/* Responsive Fixes */
+@media screen and (max-width: 768px) {
+  ul.nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #mainHeader {
+    font-size: 24px;
+  }
+
+  .eventCard {
+    padding: 10px;
+  }
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Feedback with Event Handling</title>
+  <style>
+    #eventImage {
+      width: 200px;
+      transition: width 0.3s ease;
+      cursor: pointer;
+      border: 2px solid #333;
+      border-radius: 6px;
+    }
+    #eventImage.enlarged {
+      width: 400px;
+    }
+    form {
+      max-width: 450px;
+      margin: 20px auto;
+      font-family: Arial, sans-serif;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      margin-top: 6px;
+      padding: 8px;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+    #charCount {
+      text-align: right;
+      font-size: 0.9em;
+      color: #555;
+    }
+    #phoneError {
+      color: red;
+      font-size: 0.9em;
+    }
+    #feeDisplay {
+      margin-top: 6px;
+      font-weight: bold;
+    }
+    #submitConfirmation {
+      margin-top: 15px;
+      font-weight: bold;
+      color: green;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">Event Feedback Form</h2>
+
+<form id="feedbackForm">
+  <!-- Phone Number with onblur validation -->
+  <label for="phone">Phone Number (Format: 123-456-7890):</label>
+  <input type="text" id="phone" name="phone" placeholder="123-456-7890" onblur="validatePhone()" required />
+  <div id="phoneError"></div>
+
+  <!-- Event dropdown with onchange to display fee -->
+  <label for="eventSelect">Select Event:</label>
+  <select id="eventSelect" name="eventSelect" onchange="displayFee()" required>
+    <option value="" disabled selected>Choose an event</option>
+    <option value="festival" data-fee="Free">Local Festival (Free)</option>
+    <option value="charity_run" data-fee="$20">Charity Run ($20)</option>
+    <option value="cleanup" data-fee="Free">Community Cleanup (Free)</option>
+    <option value="concert" data-fee="$15">Music Concert ($15)</option>
+  </select>
+  <div id="feeDisplay"></div>
+
+  <!-- Feedback textarea with keyboard event to count chars -->
+  <label for="feedback">Your Feedback:</label>
+  <textarea id="feedback" name="feedback" rows="5" placeholder="Type your feedback here..." onkeyup="countChars()" maxlength="250"></textarea>
+  <div id="charCount">0 / 250 characters</div>
+
+  <!-- Submit button with onclick confirmation -->
+  <button type="submit" onclick="showConfirmation(event)">Submit Feedback</button>
+  <div id="submitConfirmation"></div>
+</form>
+
+<!-- Image with ondblclick to enlarge -->
+<div style="text-align:center; margin-top:30px;">
+  <img src="event-photo.jpg" alt="Event Photo" id="eventImage" ondblclick="toggleImageSize()" title="Double-click to enlarge/shrink" />
+  <p><small>Double-click the image to enlarge or shrink it.</small></p>
+</div>
+
+<script>
+  // Validate phone on blur
+  function validatePhone() {
+    const phoneInput = document.getElementById('phone');
+    const phoneError = document.getElementById('phoneError');
+    const phonePattern = /^\d{3}-\d{3}-\d{4}$/;  // simple pattern: 123-456-7890
+
+    if (phoneInput.value === '') {
+      phoneError.textContent = '';
+      return;
+    }
+    if (!phonePattern.test(phoneInput.value)) {
+      phoneError.textContent = 'Invalid phone number format. Use 123-456-7890.';
+      phoneInput.focus();
+    } else {
+      phoneError.textContent = '';
+    }
+  }
+
+  // Show event fee on dropdown change
+  function displayFee() {
+    const eventSelect = document.getElementById('eventSelect');
+    const feeDisplay = document.getElementById('feeDisplay');
+    const selectedOption = eventSelect.options[eventSelect.selectedIndex];
+    const fee = selectedOption.getAttribute('data-fee') || '';
+    feeDisplay.textContent = fee ? Event Fee: ${fee} : '';
+  }
+
+  // Show confirmation on submit button click
+  function showConfirmation(event) {
+     event.preventDefault();  // prevent actual form submission for demo
+
+    // Basic check for phone error
+    const phoneError = document.getElementById('phoneError').textContent;
+    if (phoneError) {
+      alert('Please fix errors before submitting.');
+      return;
+    }
+
+    // Check required fields
+    const phone = document.getElementById('phone').value.trim();
+    const eventSelected = document.getElementById('eventSelect').value;
+
+    if (!phone || !eventSelected) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    document.getElementById('submitConfirmation').textContent = 'Thank you for your feedback!';
+    // Optionally, reset form:
+    document.getElementById('feedbackForm').reset();
+    document.getElementById('charCount').textContent = '0 / 250 characters';
+    document.getElementById('feeDisplay').textContent = '';
+  }
+
+  // Toggle image size on double-click
+  function toggleImageSize() {
+    const img = document.getElementById('eventImage');
+    img.classList.toggle('enlarged');
+  }
+
+  // Count characters in feedback textarea
+  function countChars() {
+    const feedback = document.getElementById('feedback');
+    const charCount = document.getElementById('charCount');
+    charCount.textContent = ${feedback.value.length} / 250 characters;
+  }
+</script>
+
+</body>
+</html>

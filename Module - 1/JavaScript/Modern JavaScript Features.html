@@ -1,0 +1,8 @@
+function register(name = "Guest", event = "General Event") {
+  console.log(${name} registered for ${event});
+}
+
+const eventObj = { name: "Hackathon", date: "2025-06-20" };
+const { name, date } = eventObj;
+
+const cloned = [...events]; // spread operator
